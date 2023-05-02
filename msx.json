@@ -28,7 +28,7 @@
     },
     {
       "id": 4,
-      "nombre": "1942",
+      "nombre": 1942,
       "sistema": "MSX",
       "distribuidor": "Zemina",
       "desarrollador": "Capcom Co., Ltd.",
@@ -136,7 +136,7 @@
     },
     {
       "id": 16,
-      "nombre": "Adven'Wchuta",
+      "nombre": "Adven'chuta",
       "sistema": "MSX",
       "distribuidor": "MIA",
       "desarrollador": "MIA",
