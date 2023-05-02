@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{%block titulo1%}LISTAJUEGOS{%endblock%}
+{%block titulo2%}
+    <h1><a href="#">Lista Juegos<strong></strong><span>PROYECTO MSX</span></a></h1>
+{%endblock%}
+{%block titulo3%}
+    Lista de juegos
+{%endblock%}
+{%block contenido%}
+    <table align="center" >
+        <tr>
+        
+            <td>
+                <a>NOMBRES</a>
+                <ul>
+                {% for a in listajuegos -%}
+                    <li><a>{{a.nombre}}</a></li>
+                {% endfor -%}
+                </ul>
+            </td>
+        
+            <td>
+                <a>DESARROLADOR</a>
+                <ul>
+                {% for a in listajuegos -%}
+                    <li><a>{{a.desarrollador}}</a></li>
+                {% endfor -%}
+                </ul>
+            </td>
+        
+            <td>
+                <a>MAS DETALLES</a>
+                <ul>
+                {% for a in listajuegos -%}
+                    <li><a href="/juego/{{a.id}}">DETALLES</a></li>
+                {% endfor -%}
+                </ul>
+            </td>
+        
+        </tr>
+
+    </table>
+{%endblock%}

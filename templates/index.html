@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{%block titulo1%}PRINCIPAL{%endblock%}
+{%block titulo2%}
+    <h1><a href="#">Pagina <strong> Principal</strong><span>PROYECTO MSX</span></a></h1>
+{%endblock%}
+
+{%block contenido%}
+<a href="/juegos"><img src="{{ url_for('static',filename='images/msx.png') }}" alt="eco green"/></a>
+{%endblock%}
