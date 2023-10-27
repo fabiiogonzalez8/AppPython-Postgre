@@ -1,9 +1,26 @@
-{% extends "base.html" %}
-{%block titulo1%}PRINCIPAL{%endblock%}
-{%block titulo2%}
-    <h1><a href="#">Pagina <strong> Principal</strong><span>PROYECTO MSX</span></a></h1>
-{%endblock%}
+<h1>PythonApp - Postgre | Fabio Gonzalez</h1>
+<section class="row tm-pt-4 tm-pb-6">
+  <div class="col-12 tm-page-cols-container">
+    <div class="tm-page-col-right">
+      <br/><br/>
+      <br/><br/>
+      <br/><br/>
+      <main>
+        <form action="/login" method="POST">
+            <h1>Login</h1>
+            <div>
+              <label for="usuario"></label>
+              <input type="text" name="usuario" id="usuario" placeholder="Inserta el usuario" autofocus required>
+            </div>
+             <div>
+              <label for="clave"></label>
+              <input type="password" name="clave" id="clave" placeholder="Inserta la contraseña" required>
+            </div>
+            </div>
+          <input type="submit" value="Iniciar Sesion"></input>
+          </form>
+      </main>
+    </div>
+  </div>
+</section>
 
-{%block contenido%}
-<a href="/juegos"><img src="{{ url_for('static',filename='images/msx.png') }}" alt="eco green"/></a>
-{%endblock%}

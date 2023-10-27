@@ -1,0 +1,38 @@
+
+          <div class="tm-page-col-right tm-tab-contents">
+            <div id="first-tab-group" class="tabgroup">
+              <div id="tab1">
+                <div class="text-content">
+                  <h1 class="tm-text-secondary tm-mb-5">
+                     Tablas del usuario Fabio en la BD prueba:
+                  </h1>
+                  <p>
+                    Tablas de la BD:
+                  </p>
+                  <ul>
+                    {% for tabla in tablas %}
+                    <li>{{ tabla }}</li>
+                    {% endfor %}
+                  </ul>
+                  <p>
+                    Tabla emp:
+                  </p>
+                  <ul>
+                    {% for emp in empno %}
+                    <li>{{ emp }}</li>
+                    {% endfor %}
+                  </ul>
+                  <br/><br/>
+                  <p>
+                    Tabla dept:
+                  </p>
+                  <ul>
+                    {% for dept in deptno %}
+                    <li>{{ dept }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

@@ -1,40 +1,57 @@
-from flask import Flask,render_template,abort,json,request
+from flask import Flask, flash, redirect, request, session, render_template, abort
 import os
+import psycopg2
 
-app = Flask(__name__)
+app = Flask (__name__)
 
-f = open('msx.json',)
+def get_db_connect():
+    connect = None
+    emp = None
+    dept = None
+    tabla = None
 
-datos = json.load(f)
+    try:
+        connect = psycopg2.connect(host="192.168.122.133", dbname="prueba", user="fabio", password="usuario")
+    except Exception as excepcion:
+        print("No puedo conectar a la base de datos:",excepcion)
 
-@app.route('/',methods=["GET","POST"])
+    return connect
+
+
+def emp_dept():
+    connect = get_db_connect()
+
+    emp = connect.cursor()
+    emp.execute("select * from emp;")
+    empno = emp.fetchall()
+
+    tabla_cursor = connect.cursor()
+    tabla_cursor.execute("""SELECT table_name FROM information_schema.tables
+       WHERE table_schema = 'public'""")
+    tablas = tabla_cursor.fetchall()
+
+    dept = connect.cursor()
+    dept.execute("select * from dept;")
+    deptno=dept.fetchall()
+
+    return render_template("postgres.html", tablas=tablas, empno=empno, deptno=deptno)
+
+
+@app.route('/',methods=["GET"])
 def inicio():
-	return render_template("index.html")
+    if not session.get("logged_in"):
+        return render_template("index.html")
+    else:
+        return emp_dept()
 
-@app.route('/juegos',methods=["GET"])
-def juegos():
-    return render_template("juegos.html")
+@app.route('/login', methods=["POST"])
+def login():
+    if request.form['usuario'] == 'fabio' and request.form['clave'] == 'usuario':
+        session['logged_in'] = True
+    return redirect("/")
 
-@app.route('/listajuegos',methods=["POST"])
-def listajuegos():
-  listajuegos=[]
-  formulario=request.form.get("informacion")
-  for a in datos:
-  	if str(formulario) == "" or str(a["nombre"]).startswith(formulario) :
-	   listajuegos.append(a)
-  return render_template("listajuegos.html",listajuegos=listajuegos)
+if __name__ == "__main__":
+    app.secret_key = os.urandom(12)
+    app.config['SESSION_TYPE'] = 'filesystem'
 
-@app.route('/juego/<identificador>')
-def juego(identificador):
-  lista=[]
-  ind=False
-  for b in datos:
-    if int(b.get("id")) == int(identificador):
-      ind=True
-      lista.append(b)
-  if ind:
-    return render_template("juego.html",lista=lista)
-  else:
-    abort(404)
-
-app.run("0.0.0.0",5000,debug=True)
+    app.run('0.0.0.0' ,debug=False)
